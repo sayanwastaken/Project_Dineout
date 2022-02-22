@@ -9,5 +9,6 @@ export const Button = styled.button`
 	border: none;
 	border-radius: 5px;
 	padding: 7px 12px;
+	width: ${(props) => (props.wd ? props.wd : "fit-content")};
 	cursor: pointer;
 `;

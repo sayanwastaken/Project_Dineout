@@ -1,17 +1,51 @@
 import styled from "styled-components";
 
 export const Lmodal = styled.div`
-	height: 300px;
+	height: fit-content;
 	background-color: #fdfffc;
 	width: 450px;
 	border-radius: 20px;
 	position: fixed;
-	padding: 15px 20px;
+	padding: 20px 25px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	top: 40%;
 	color: black;
 	left: 50%;
 	transform: translate(-50%, -40%);
+
+	.loginForm {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+		margin-top: 20px;
+
+		input[type="text"] {
+			width: 100%;
+			border: none;
+			padding: 10px 0;
+			font-size: 17px;
+			border-bottom: 1px solid grey;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+
+	.orLoginVia {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+		width: 100%;
+
+		.blackLineDiv {
+			border-top: 1px solid black;
+			width: 35%;
+		}
+	}
 
 	.topHeading {
 		display: flex;
@@ -21,7 +55,8 @@ export const Lmodal = styled.div`
 		color: rgb(29, 29, 29);
 
 		h2 {
-			font-weight: 400;
+			font-weight: 600;
+			color: #ff645a;
 
 			margin: 0;
 		}
