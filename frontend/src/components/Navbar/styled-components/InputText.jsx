@@ -5,4 +5,9 @@ export const InputText = styled.input`
 	border: none;
 	border-radius: 5px;
 	padding: 7px 12px;
+	width: 600px;
+
+	&:focus {
+		outline: none;
+	}
 `;
