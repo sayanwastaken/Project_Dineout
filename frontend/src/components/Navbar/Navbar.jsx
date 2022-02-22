@@ -1,12 +1,23 @@
-import { useState } from "react";
+// Third Party Imports
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+// Inner Imports
 import { Button } from "./styled-components/Button";
 import { InputText } from "./styled-components/InputText";
 import { NavSelect } from "./styled-components/NavSelect";
-import { Link } from "react-router-dom";
+import { locations } from "./locations";
+import { togglePopup } from "../../store/LoginPopup/actions";
+
+// Styles
 import "./styles/nav.global.scss";
 
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
+	const [location, setLocation] = useState("");
+	const locationRef = useRef();
+	const dispatch = useDispatch();
 
 	const toggleClick = () => {
 		setSelectClick(!selectClick);
@@ -24,9 +35,24 @@ export const Navbar = () => {
 						}}
 						className="location_option"
 					>
-						<p>Select Location</p>
+						<p ref={locationRef}>{location ? location : "Select Location"}</p>
 
-						<div className="l_options"></div>
+						<div className="l_options">
+							<Button fs="12px">Use my current location</Button>
+							{locations.map((oneLocation) => {
+								return (
+									<p
+										onClick={() => {
+											setLocation(oneLocation);
+										}}
+										className="oneLocation"
+										key={oneLocation}
+									>
+										{oneLocation}
+									</p>
+								);
+							})}
+						</div>
 					</div>
 				</NavSelect>
 				<span className="inputSpan">
@@ -38,12 +64,12 @@ export const Navbar = () => {
 					<Button>Search</Button>
 				</span>
 
-				<Button>Login</Button>
+				<Button onClick={() => dispatch(togglePopup())}>Login</Button>
 			</nav>
 
 			<ul className="bottom_search_options">
 				<li>
-					<Link to="/">Home</Link>{" "}
+					<Link to="/">Home</Link>
 				</li>
 				<li>
 					<Link to="/">Book A Table</Link>

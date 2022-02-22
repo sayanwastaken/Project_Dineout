@@ -4,7 +4,7 @@ const init = {
 	restraunts: [],
 };
 
-export const reducer = (state = init, { type, payload }) => {
+export const otherReducer = (state = init, { type, payload }) => {
 	switch (type) {
 		case ADD_REST:
 			return { ...state, restraunts: [...state.restraunts, payload] };
