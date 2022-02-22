@@ -1,14 +1,14 @@
 // Third Party Imports
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Inner Imports
 import { Button } from "./styled-components/Button";
 import { InputText } from "./styled-components/InputText";
 import { NavSelect } from "./styled-components/NavSelect";
 import { locations } from "./locations";
-import { togglePopup } from "../../store/LoginPopup/actions";
+import { openPopup } from "../../store/LoginPopup/actions";
 
 // Styles
 import "./styles/nav.global.scss";
@@ -18,6 +18,7 @@ export const Navbar = () => {
 	const [location, setLocation] = useState("");
 	const locationRef = useRef();
 	const dispatch = useDispatch();
+	const { isPopupOn } = useSelector((store) => store.popupReducer);
 
 	const toggleClick = () => {
 		setSelectClick(!selectClick);
@@ -26,7 +27,7 @@ export const Navbar = () => {
 	return (
 		<div className="wrapper">
 			<nav className="navbar">
-				<NavSelect isSelect={selectClick}>
+				<NavSelect isSelect={selectClick} isPopup={isPopupOn}>
 					<i className="material-icons location">location_on</i>
 					<i className="material-icons down_arrow">arrow_drop_down</i>
 					<div
@@ -59,12 +60,13 @@ export const Navbar = () => {
 					<i className="material-icons">search</i>
 					<InputText
 						type="search"
+						isPopup={isPopupOn}
 						placeholder="Search for Restraunts, Offers, Deals or Events..."
 					/>
 					<Button>Search</Button>
 				</span>
 
-				<Button onClick={() => dispatch(togglePopup())}>Login</Button>
+				<Button onClick={() => dispatch(openPopup())}>Login</Button>
 			</nav>
 
 			<ul className="bottom_search_options">

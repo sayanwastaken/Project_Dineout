@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 
 // Inner Imports
-import { togglePopup } from "../../store/LoginPopup/actions";
+import { closePopup } from "../../store/LoginPopup/actions";
 import { Button } from "./styled-components/Button";
 import { Lmodal } from "./styled-components/Lmodal";
 
@@ -14,7 +14,7 @@ export const LoginModal = () => {
 				<h2>Login / Signup</h2>
 				<i
 					onClick={() => {
-						dispatch(togglePopup());
+						dispatch(closePopup());
 					}}
 					className="material-icons"
 				>
