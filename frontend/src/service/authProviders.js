@@ -1,4 +1,4 @@
-import { authentication } from "../configs/myFirebase";
+
 import {
   GoogleAuthProvider,
   FacebookAuthProvider,
