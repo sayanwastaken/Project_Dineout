@@ -1,0 +1,50 @@
+.wrapper {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	padding-bottom: 5px;
+	.navbar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		border-bottom: 1px solid rgb(196, 196, 196);
+		padding: 15px 0;
+
+		i.material-icons {
+			color: grey;
+		}
+
+		.inputSpan {
+			border: 1px solid rgb(196, 196, 196);
+			border-radius: 5px;
+			width: fit-content;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 4px 7px;
+
+			i {
+				color: #ff645a;
+			}
+		}
+	}
+
+	.bottom_search_options {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+		font-size: 14px;
+
+		align-items: center;
+		li {
+			a {
+				text-decoration: none;
+				color: grey;
+
+				&:hover {
+					color: #ff645a;
+				}
+			}
+		}
+	}
+}
