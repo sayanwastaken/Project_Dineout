@@ -8,17 +8,19 @@ import { Button } from "./styled-components/Button";
 import { InputText } from "./styled-components/InputText";
 import { NavSelect } from "./styled-components/NavSelect";
 import { locations } from "./locations";
-import { openPopup } from "../../store/LoginPopup/actions";
+import { openPopup } from "../../store/Login/actions";
 
 // Styles
 import "./styles/nav.global.scss";
+import { LoggedInMenu } from "./LoggedInMenu";
 
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
 	const [location, setLocation] = useState("");
 	const locationRef = useRef();
 	const dispatch = useDispatch();
-	const { isPopupOn } = useSelector((store) => store.popupReducer);
+
+	const { isPopupOn, isLoggedIn } = useSelector((store) => store.loginReducer);
 
 	const toggleClick = () => {
 		setSelectClick(!selectClick);
@@ -66,7 +68,11 @@ export const Navbar = () => {
 					<Button>Search</Button>
 				</span>
 
-				<Button onClick={() => dispatch(openPopup())}>Login</Button>
+				{!isLoggedIn ? (
+					<Button onClick={() => dispatch(openPopup())}>Login</Button>
+				) : (
+					<LoggedInMenu />
+				)}
 			</nav>
 
 			<ul className="bottom_search_options">

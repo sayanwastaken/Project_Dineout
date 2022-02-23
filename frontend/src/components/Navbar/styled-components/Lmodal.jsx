@@ -13,7 +13,8 @@ export const Lmodal = styled.div`
 	left: 50%;
 	transform: translate(-50%, -40%);
 
-	.loginForm {
+	.loginForm,
+	.signupForm {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -67,5 +68,11 @@ export const Lmodal = styled.div`
 				cursor: pointer;
 			}
 		}
+	}
+	.social__login {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		gap: 20px;
 	}
 `;
