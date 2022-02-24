@@ -1,0 +1,47 @@
+.single_prev_details {
+	border: 1px solid black;
+	width: 60%;
+	margin: auto;
+	margin-top: 20px;
+
+	h1 {
+		margin: 10px 0 5px 0;
+	}
+
+	.mainHeading {
+		font-weight: 700;
+		color: rgb(29, 29, 29);
+
+		& + p {
+			color: grey;
+			font-size: 20px;
+			margin: 5px 0;
+			font-weight: 600;
+		}
+	}
+
+	.guest__details,
+	.booking__summary {
+		// display: flex;
+		// justify-content: center;
+		// align-items: center;
+		border: 1px solid red;
+
+		span {
+			display: flex;
+			justify-content: space-between;
+			border: 1px solid green;
+			width: 90%;
+			margin: auto;
+
+			p:first-child {
+				color: rgb(29, 29, 29);
+				font-weight: 600;
+			}
+
+			p:last-child {
+				color: rgb(29, 29, 29);
+			}
+		}
+	}
+}

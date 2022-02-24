@@ -67,7 +67,6 @@ export const fetchUser = (payload) => (dispatch) => {
 };
 
 export const postUserData = (payload) => (dispatch) => {
-	console.log(payload);
 	axios
 		.post(`http://localhost:8000/users`, payload)
 		.then(() => {
@@ -75,4 +74,11 @@ export const postUserData = (payload) => (dispatch) => {
 			dispatch(closeSignupPopup());
 		})
 		.catch((err) => console.log(err));
+};
+
+export const updateUser = (payload) => (dispatch) => {
+	console.log(payload);
+	axios.patch(`http://localhost:8000/users/${payload.id}`, payload).then(() => {
+		dispatch(setLoggedIn(payload));
+	});
 };

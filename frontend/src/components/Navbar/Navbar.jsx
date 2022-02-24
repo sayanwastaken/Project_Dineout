@@ -13,6 +13,8 @@ import { openPopup } from "../../store/Login/actions";
 // Styles
 import "./styles/nav.global.scss";
 import { LoggedInMenu } from "./LoggedInMenu";
+import { LoginModal } from "./LoginModal";
+import { SignupModal } from "./SignupModal";
 
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
@@ -20,7 +22,19 @@ export const Navbar = () => {
 	const locationRef = useRef();
 	const dispatch = useDispatch();
 
-	const { isPopupOn, isLoggedIn } = useSelector((store) => store.loginReducer);
+	// Modals state
+	// const [signUpModal, setSignUpModal] = useState(false);
+
+	const [loginModal, setLoginModal] = useState(false);
+
+	// Modal Handlers
+	const handleLoginModal = (value) => {
+		setLoginModal(value);
+	};
+
+	const { isPopupOn, isLoggedIn, isSignupPopupOn } = useSelector(
+		(store) => store.loginReducer
+	);
 
 	const toggleClick = () => {
 		setSelectClick(!selectClick);
@@ -69,7 +83,7 @@ export const Navbar = () => {
 				</span>
 
 				{!isLoggedIn ? (
-					<Button onClick={() => dispatch(openPopup())}>Login</Button>
+					<Button onClick={() => handleLoginModal(true)}>Login</Button>
 				) : (
 					<LoggedInMenu />
 				)}
@@ -92,6 +106,10 @@ export const Navbar = () => {
 					<Link to="/">Super Saver</Link>
 				</li>
 			</ul>
+
+			{/* Modals */}
+			{loginModal && <LoginModal handler={handleLoginModal} />}
+			{isSignupPopupOn && <SignupModal />}
 		</div>
 	);
 };

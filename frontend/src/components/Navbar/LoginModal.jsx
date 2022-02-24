@@ -3,14 +3,14 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Inner Imports
-import { closePopup, fetchUser, logIn } from "../../store/Login/actions";
+import { fetchUser, logIn } from "../../store/Login/actions";
 import { Button } from "./styled-components/Button";
 import { Lmodal } from "./styled-components/Lmodal";
 import { SocialButton } from "./styled-components/SocialButton";
 
 // Styles Imports
 
-export const LoginModal = () => {
+export const LoginModal = ({ handler }) => {
 	const { signUp, isSignupPopupOn } = useSelector(
 		(store) => store.loginReducer
 	);
@@ -26,7 +26,8 @@ export const LoginModal = () => {
 				<h2>Login / Signup</h2>
 				<i
 					onClick={() => {
-						dispatch(closePopup());
+						handler(false);
+						// dispatch(closePopup());
 					}}
 					className="material-icons"
 				>
@@ -49,7 +50,8 @@ export const LoginModal = () => {
 					wd="100%"
 					onClick={() => {
 						dispatch(fetchUser(inputRef.current.value));
-						dispatch(closePopup());
+						handler(false);
+						// dispatch(closePopup());
 					}}
 				>
 					Continue
