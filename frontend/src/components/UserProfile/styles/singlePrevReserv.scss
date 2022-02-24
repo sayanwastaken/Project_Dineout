@@ -1,9 +1,12 @@
+@import "../../../global.scss";
+
 .single_prev_details {
 	background-color: rgb(240, 240, 240);
+
 	border-radius: 20px;
 	width: 60%;
 	margin: auto;
-	margin-top: 20px;
+	margin-top: $margin-top;
 	margin-bottom: 20px;
 
 	h1 {

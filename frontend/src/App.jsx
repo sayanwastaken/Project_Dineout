@@ -38,35 +38,42 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getRestaurants());
-		console.log(restaurants);
 	}, []);
 
 	return (
-		<div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
+		<div
+			style={{ marginTop: "150px" }}
+			className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}
+		>
 			<Navbar />
-			<button onClick={() => authHandler(authentication, googleProvider)}>
-				GOOGLE-Login
-			</button>
-			<button onClick={() => authHandler(authentication, facebookProvider)}>
-				Facebook-Login
-			</button>
-			<button
-				onClick={() => {
-					console.log(socialUser);
-				}}
-			>
-				see store
-			</button>
-			<button
-				onClick={() => {
-					dispatch(userLogout());
-				}}
-			>
-				logout
-			</button>
-
+			<div className="authbuttons">
+				<button onClick={() => authHandler(authentication, googleProvider)}>
+					GOOGLE-Login
+				</button>
+				<button onClick={() => authHandler(authentication, facebookProvider)}>
+					Facebook-Login
+				</button>
+				<button
+					onClick={() => {
+						console.log(socialUser);
+					}}
+				>
+					see store
+				</button>
+				<button
+					onClick={() => {
+						dispatch(userLogout());
+					}}
+				>
+					logout
+				</button>
+			</div>
 			<Routes>
 				<Route path="/users/:id" element={<UserProfile />}></Route>
+				<Route
+					path="/users/:id/confirmed-bookings/:bookID"
+					element={<SinglePrevReservDetails />}
+				></Route>
 			</Routes>
 		</div>
 	);

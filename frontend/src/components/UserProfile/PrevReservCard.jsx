@@ -1,9 +1,18 @@
+// Third party imports
+import { useNavigate } from "react-router-dom";
+
 // Styles Imports
 import "./styles/prevcard.global.scss";
 
 export const PrevReservCard = () => {
+	const navigate = useNavigate();
 	return (
-		<div className="prev__reserv-card">
+		<div
+			onClick={() => {
+				navigate(`confirmed-bookings/1`);
+			}}
+			className="prev__reserv-card"
+		>
 			<img src="https://picsum.photos/110" alt="" />
 
 			<div className="text__section">
