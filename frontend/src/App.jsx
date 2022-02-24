@@ -16,59 +16,59 @@ import "./App.css";
 import { UserProfile } from "./components/UserProfile/UserProfile";
 
 function App() {
-  const { isPopupOn, isSignupPopupOn } = useSelector(
-    (store) => store.loginReducer
-  );
-  const { restaurants } = useSelector((store) => store.otherReducer);
+	const { isPopupOn, isSignupPopupOn } = useSelector(
+		(store) => store.loginReducer
+	);
+	const { restaurants } = useSelector((store) => store.otherReducer);
 
-  const { socialUser } = useSelector((store) => store.authReducer);
-  const dispatch = useDispatch();
+	const { socialUser } = useSelector((store) => store.authReducer);
+	const dispatch = useDispatch();
 
-  const authHandler = (authentication, authProvider) => {
-    signInWithPopup(authentication, authProvider)
-      .then((res) => {
-        // console.log(res);
-        dispatch(userLogin(res.user));
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+	const authHandler = (authentication, authProvider) => {
+		signInWithPopup(authentication, authProvider)
+			.then((res) => {
+				// console.log(res);
+				dispatch(userLogin(res.user));
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
-  useEffect(() => {
-    dispatch(getRestaurants());
-    console.log(restaurants);
-  }, []);
+	useEffect(() => {
+		dispatch(getRestaurants());
+		console.log(restaurants);
+	}, []);
 
-  return (
-    <div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
-      <Navbar />
-      <button onClick={() => authHandler(authentication, googleProvider)}>
-        GOOGLE-Login
-      </button>
-      <button onClick={() => authHandler(authentication, facebookProvider)}>
-        Facebook-Login
-      </button>
-      <button
-        onClick={() => {
-          console.log(socialUser);
-        }}
-      >
-        see store
-      </button>
-      <button
-        onClick={() => {
-          dispatch(userLogout());
-        }}
-      >
-        logout
-      </button>
+	return (
+		<div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
+			<Navbar />
+			<button onClick={() => authHandler(authentication, googleProvider)}>
+				GOOGLE-Login
+			</button>
+			<button onClick={() => authHandler(authentication, facebookProvider)}>
+				Facebook-Login
+			</button>
+			<button
+				onClick={() => {
+					console.log(socialUser);
+				}}
+			>
+				see store
+			</button>
+			<button
+				onClick={() => {
+					dispatch(userLogout());
+				}}
+			>
+				logout
+			</button>
 
-      <Routes>
-        <Route path="/users/:id" element={<UserProfile />}></Route>
-      </Routes>
-    </div>
-  );
+			<Routes>
+				<Route path="/users/:id" element={<UserProfile />}></Route>
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
