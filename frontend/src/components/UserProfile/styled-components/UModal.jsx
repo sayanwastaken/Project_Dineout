@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Lmodal = styled.div`
+export const UModal = styled.div`
 	height: fit-content;
 	background-color: #fdfffc;
 	width: 450px;
@@ -13,8 +13,7 @@ export const Lmodal = styled.div`
 	left: 50%;
 	transform: translate(-50%, -40%);
 
-	.loginForm,
-	.signupForm {
+	.editForm {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -35,19 +34,6 @@ export const Lmodal = styled.div`
 		}
 	}
 
-	.orLoginVia {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 10px;
-		width: 100%;
-
-		.blackLineDiv {
-			border-top: 1px solid black;
-			width: 35%;
-		}
-	}
-
 	.topHeading {
 		display: flex;
 		justify-content: space-between;
@@ -64,15 +50,10 @@ export const Lmodal = styled.div`
 
 		i {
 			font-size: 30px;
+
 			&:hover {
 				cursor: pointer;
 			}
 		}
-	}
-	.social__login {
-		display: flex;
-		justify-content: space-evenly;
-		align-items: center;
-		gap: 20px;
 	}
 `;
