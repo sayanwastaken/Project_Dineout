@@ -1,10 +1,17 @@
-import { createStore, combineReducers } from "redux";
-import { otherReducer } from "./OtherStuff/reducer";
-import { popupReducer } from "./LoginPopup/reducer";
+// Third Party Imports
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
-const combinedReducer = combineReducers({ popupReducer, otherReducer });
+// Inner Imports
+import { otherReducer } from "./OtherStuff/reducer";
+import { loginReducer } from "./Login/reducer";
+
+const combinedReducer = combineReducers({ loginReducer, otherReducer });
 
 export const store = createStore(
 	combinedReducer,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	composeWithDevTools(applyMiddleware(thunk))
+
+	// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
