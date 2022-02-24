@@ -27,7 +27,8 @@ function App() {
 	return (
 		<div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
 			<Navbar />
-			<SinglePrevReservDetails />
+			{/* <SinglePrevReservDetails /> */}
+
 			<Routes>
 				<Route path="/users/:id" element={<UserProfile />}></Route>
 			</Routes>

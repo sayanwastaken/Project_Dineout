@@ -34,6 +34,7 @@ export const NavSelect = styled.div`
 		display: ${(props) => (props.isSelect ? "block" : "none")};
 		position: relative;
 		top: 85px;
+		z-index: 10;
 		border: 1px solid black;
 		width: 186px;
 		padding: 5px 0;
@@ -70,6 +71,7 @@ export const NavSelect = styled.div`
 		display: ${(props) => (props.isSelect ? "block" : "none")};
 		border: 1px solid grey;
 		position: absolute;
+		z-index: 10;
 		width: 80%;
 		top: 40px;
 		height: 100px;
