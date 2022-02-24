@@ -10,6 +10,7 @@ import { getRestaurants } from "./store/OtherStuff/actions";
 // Styles Imports
 import "./App.css";
 import { UserProfile } from "./components/UserProfile/UserProfile";
+import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevReserv";
 
 function App() {
 	const { isPopupOn, isSignupPopupOn } = useSelector(
@@ -26,6 +27,7 @@ function App() {
 	return (
 		<div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
 			<Navbar />
+			<SinglePrevReservDetails />
 			<Routes>
 				<Route path="/users/:id" element={<UserProfile />}></Route>
 			</Routes>

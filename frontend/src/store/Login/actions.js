@@ -69,8 +69,8 @@ export const fetchUser = (payload) => (dispatch) => {
 export const postUserData = (payload) => (dispatch) => {
 	axios
 		.post(`http://localhost:8000/users`, payload)
-		.then(() => {
-			dispatch(setLoggedIn(payload));
+		.then((data) => {
+			dispatch(setLoggedIn(data.data));
 			dispatch(closeSignupPopup());
 		})
 		.catch((err) => console.log(err));
