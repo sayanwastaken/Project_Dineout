@@ -14,7 +14,6 @@ import { userLogin, userLogout } from "./store/authRedux/actions";
 // Styles Imports
 import "./App.css";
 import { UserProfile } from "./components/UserProfile/UserProfile";
-import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevReserv";
 
 function App() {
 	const { isPopupOn, isSignupPopupOn } = useSelector(
@@ -38,15 +37,13 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getRestaurants());
+		console.log(restaurants);
 	}, []);
 
 	return (
-		<div
-			style={{ marginTop: "150px" }}
-			className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}
-		>
+		<div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
 			<Navbar />
-			<div className="authbuttons">
+			<div style={{ marginTop: "150px" }}>
 				<button onClick={() => authHandler(authentication, googleProvider)}>
 					GOOGLE-Login
 				</button>
@@ -70,10 +67,6 @@ function App() {
 			</div>
 			<Routes>
 				<Route path="/users/:id" element={<UserProfile />}></Route>
-				<Route
-					path="/users/:id/confirmed-bookings/:bookID"
-					element={<SinglePrevReservDetails />}
-				></Route>
 			</Routes>
 		</div>
 	);
