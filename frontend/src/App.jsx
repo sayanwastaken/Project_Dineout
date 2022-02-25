@@ -14,29 +14,30 @@ import { useDispatch } from "react-redux";
 import { setLoggedIn } from "./store/Login/actions";
 
 function App() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	const LOGGED_IN_USER =
-		JSON.parse(localStorage.getItem("loggedinuser")) || null;
+  const LOGGED_IN_USER =
+    JSON.parse(localStorage.getItem("loggedinuser")) || null;
 
-	if (LOGGED_IN_USER) {
-		dispatch(setLoggedIn(LOGGED_IN_USER));
-	}
+  if (LOGGED_IN_USER) {
+    dispatch(setLoggedIn(LOGGED_IN_USER));
+  }
 
-	return (
-		<div className="App">
-			<Navbar />
-			{/* <FilterSection /> */}
-			<Routes>
-				<Route path="/users/:id" element={<UserProfile />}></Route>
-				<Route
-					path="/users/:id/confirmed-bookings/:pID"
-					element={<SinglePrevReservDetails />}
-				></Route>
-				<Route path="/book-a-table" element={<BookATable />}></Route>
-			</Routes>
-		</div>
-	);
+  return (
+    <div className="App">
+      {/* hey robby made changes */}
+      <Navbar />
+      {/* <FilterSection /> */}
+      <Routes>
+        <Route path="/users/:id" element={<UserProfile />}></Route>
+        <Route
+          path="/users/:id/confirmed-bookings/:pID"
+          element={<SinglePrevReservDetails />}
+        ></Route>
+        <Route path="/book-a-table" element={<BookATable />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
