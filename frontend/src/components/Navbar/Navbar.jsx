@@ -8,13 +8,13 @@ import { Button } from "./styled-components/Button";
 import { InputText } from "./styled-components/InputText";
 import { NavSelect } from "./styled-components/NavSelect";
 import { locations } from "./locations";
-import { openPopup } from "../../store/Login/actions";
-
-// Styles
-import "./styles/nav.global.scss";
 import { LoggedInMenu } from "./LoggedInMenu";
 import { LoginModal } from "./LoginModal";
 import { SignupModal } from "./SignupModal";
+
+// Styles
+import "./styles/nav.global.scss";
+import { applySearch } from "../../store/Restaurants/actions";
 
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
@@ -39,6 +39,9 @@ export const Navbar = () => {
 	const toggleClick = () => {
 		setSelectClick(!selectClick);
 	};
+
+	// Input REf
+	const inputRef = useRef();
 
 	return (
 		<div className="wrapper">
@@ -75,11 +78,14 @@ export const Navbar = () => {
 				<span className="inputSpan">
 					<i className="material-icons">search</i>
 					<InputText
+						ref={inputRef}
 						type="search"
 						isPopup={isPopupOn}
 						placeholder="Search for Restraunts, Offers, Deals or Events..."
 					/>
-					<Button>Search</Button>
+					<Button onClick={() => dispatch(applySearch(inputRef.current.value))}>
+						Search
+					</Button>
 				</span>
 
 				{!isLoggedIn ? (
@@ -94,7 +100,7 @@ export const Navbar = () => {
 					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="/">Book A Table</Link>
+					<Link to="/book-a-table">Book A Table</Link>
 				</li>
 				<li>
 					<Link to="/">Dineout Pay</Link>

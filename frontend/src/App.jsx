@@ -8,19 +8,32 @@ import { Navbar } from "./components/Navbar/Navbar";
 // Styles Imports
 import "./App.css";
 import { UserProfile } from "./components/UserProfile/UserProfile";
-import { OfferOrDeal } from "./components/SingleRestaurant/OfferOrDeal";
+import { BookATable } from "./components/BookATable/BookATable";
+import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevReserv";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "./store/Login/actions";
 
 function App() {
-	const { isPopupOn, isSignupPopupOn } = useSelector(
-		(store) => store.loginReducer
-	);
+	const dispatch = useDispatch();
+
+	const LOGGED_IN_USER =
+		JSON.parse(localStorage.getItem("loggedinuser")) || null;
+
+	if (LOGGED_IN_USER) {
+		dispatch(setLoggedIn(LOGGED_IN_USER));
+	}
+
 	return (
 		<div className="App">
-			<OfferOrDeal />
-			{/* <Navbar /> */}
-
+			<Navbar />
+			{/* <FilterSection /> */}
 			<Routes>
-				{/* <Route path="/users/:id" element={<UserProfile />}></Route> */}
+				<Route path="/users/:id" element={<UserProfile />}></Route>
+				<Route
+					path="/users/:id/confirmed-bookings/:pID"
+					element={<SinglePrevReservDetails />}
+				></Route>
+				<Route path="/book-a-table" element={<BookATable />}></Route>
 			</Routes>
 		</div>
 	);
