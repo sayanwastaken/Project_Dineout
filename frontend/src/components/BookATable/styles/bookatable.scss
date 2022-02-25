@@ -1,0 +1,23 @@
+@import "../../../global.scss";
+
+.mapped__restaurants {
+	margin-top: $margin-top;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+
+	.left {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		margin-left: 20px;
+	}
+	.right {
+		flex: 3;
+		display: grid;
+		grid-template-columns: repeat(3, 28%);
+		place-content: center;
+		gap: 20px;
+	}
+}

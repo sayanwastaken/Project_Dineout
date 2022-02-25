@@ -4,30 +4,28 @@ import { useNavigate } from "react-router-dom";
 
 // Inner Components Imports
 import { OfferSection } from "./OfferSection";
+import { ratingsArray } from "./randomRatings";
 
 // Styles Import
 import "./styles/rscard.global.scss";
 
-export const RestaurantCard = ({ name, type, price, features }) => {
+export const RestaurantCard = ({ name, type, price, features, image, id }) => {
 	const navigate = useNavigate();
 
 	return (
 		<div className="restaurantCard">
-			<img
-				onClick={() => navigate("/")}
-				src="https://picsum.photos/270/170"
-				alt=""
-			/>
+			<img onClick={() => navigate(`/book-a-table/${id}`)} src={image} alt="" />
 			<div className="card__text">
 				<h3 className="card__heading">{name}</h3>
-				<p className="card__rating">4.1</p>
+				<p className="card__rating">
+					{ratingsArray[Math.floor(Math.random() * ratingsArray.length)]}
+				</p>
 				<p className="card__address">Defence Colony, South Delhi</p>
 				<p className="card__price-category">
-					₹ {+price * 2} for 2 (approx) |{" "}
-					{type.charAt(0).toUpperCase() + type.slice(1)}
+					₹ {price} | {type.join(", ")}
 				</p>
 			</div>
-			<OfferSection />
+			{/* <OfferSection /> */}
 		</div>
 	);
 };

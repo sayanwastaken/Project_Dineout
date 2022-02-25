@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Inner Imports
 import {
-	closePopup,
 	closeSignupPopup,
-	fetchUser,
 	logIn,
 	postUserData,
 } from "../../store/Login/actions";
@@ -13,7 +11,7 @@ import { Button } from "./styled-components/Button";
 import { Lmodal } from "./styled-components/Lmodal";
 
 export const SignupModal = () => {
-	const { signUp } = useSelector((store) => store.loginReducer);
+	const { signUp, isLoading } = useSelector((store) => store.loginReducer);
 	useEffect(() => {
 		console.log(signUp);
 	}, [signUp]);
@@ -23,7 +21,9 @@ export const SignupModal = () => {
 	const phoneNumberRef = useRef();
 	const emailRef = useRef();
 
-	return (
+	return isLoading ? (
+		<p>Loading...</p>
+	) : (
 		<Lmodal>
 			<span className="topHeading">
 				<h2>Signup</h2>
@@ -56,6 +56,7 @@ export const SignupModal = () => {
 						name: nameRef.current.value,
 						mobile: phoneNumberRef.current.value,
 						email: emailRef.current.value,
+						prevReservations: [],
 					};
 					dispatch(postUserData(payload));
 					dispatch(logIn());
