@@ -59,7 +59,7 @@ export const signUp = () => {
 };
 
 export const fetchUser = (payload) => (dispatch) => {
-	fetch(`http://localhost:8000/users?mobile=${String(payload)}`)
+	fetch(`http://localhost:8000/users?email=${String(payload)}`)
 		.then((api) => api.json())
 		.then((data) => {
 			data.length === 0 ? dispatch(signUp()) : dispatch(setLoggedIn(data[0]));
@@ -81,4 +81,24 @@ export const updateUser = (payload) => (dispatch) => {
 	axios.patch(`http://localhost:8000/users/${payload.id}`, payload).then(() => {
 		dispatch(setLoggedIn(payload));
 	});
+};
+
+export const checkUser = (payload) => (dispatch) => {
+	fetch(`http://localhost:8000/users?email=${payload.email}`)
+		.then((api) => api.json())
+		.then((data) => {
+			if (data.length === 0) {
+				fetch(`http://localhost:8000/users`, {
+					method: "POST",
+					body: JSON.stringify(payload),
+					headers: {
+						"content-type": "application/json",
+					},
+				})
+					.then((api) => api.json())
+					.then((data) => dispatch(setLoggedIn(data)));
+			} else {
+				dispatch(setLoggedIn(data[0]));
+			}
+		});
 };
