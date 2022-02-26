@@ -10,6 +10,7 @@ import { authentication } from "./configs/myFirebase";
 import { signInWithPopup } from "firebase/auth";
 import { googleProvider, facebookProvider } from "./service/authProviders";
 import { userLogin, userLogout } from "./store/authRedux/actions";
+import Restaurant from "./components/RestPage/Restaurant";
 
 // Styles Imports
 import "./App.css";
@@ -43,30 +44,11 @@ function App() {
   return (
     <div className={`App ${isPopupOn || isSignupPopupOn ? "popUpOn" : ""}`}>
       <Navbar />
-      <button onClick={() => authHandler(authentication, googleProvider)}>
-        GOOGLE-Login
-      </button>
-      <button onClick={() => authHandler(authentication, facebookProvider)}>
-        Facebook-Login
-      </button>
-      <button
-        onClick={() => {
-          console.log(socialUser);
-        }}
-      >
-        see store
-      </button>
-      <button
-        onClick={() => {
-          dispatch(userLogout());
-        }}
-      >
-        logout
-      </button>
-
       <Routes>
         <Route path="/users/:id" element={<UserProfile />}></Route>
+        <Route path="/restaurants" element={<Restaurant />}></Route>
       </Routes>
+      
     </div>
   );
 }
