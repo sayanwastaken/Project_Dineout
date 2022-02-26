@@ -1,4 +1,7 @@
+@import "../../../global.scss";
+
 .userProfile {
+	margin-top: $margin-top;
 	.user__info-edits {
 		display: flex;
 		justify-content: flex-start;

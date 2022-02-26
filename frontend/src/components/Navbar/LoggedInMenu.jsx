@@ -7,18 +7,20 @@ import { NavSelect } from "./styled-components/NavSelect";
 export const LoggedInMenu = () => {
 	const [select, setSelect] = useState(false);
 	const navigate = useNavigate();
-	const {
-		loggedInUser: { name, mobile, email, id },
-	} = useSelector((store) => store.loginReducer);
+	const { loggedInUser, isLoading } = useSelector(
+		(store) => store.loginReducer
+	);
 
 	const dispatch = useDispatch();
 	const toggleSelect = () => {
 		setSelect(!select);
 	};
-	return (
+	return isLoading ? (
+		<p>Loading...</p>
+	) : (
 		<NavSelect isSelect={select} border="none" width="150px">
 			<p className="first_last_name">
-				{name
+				{loggedInUser.name
 					.split(" ")
 					.map((c) => c.charAt(0).toUpperCase())
 					.join("")}
@@ -29,7 +31,7 @@ export const LoggedInMenu = () => {
 			<div className="drop_down">
 				<p
 					onClick={() => {
-						navigate(`/users/${id}`);
+						navigate(`/users/${loggedInUser.id}`);
 						toggleSelect();
 					}}
 				>
@@ -40,6 +42,7 @@ export const LoggedInMenu = () => {
 					onClick={() => {
 						navigate("/");
 						dispatch(logOut());
+						localStorage.removeItem("loggedinuser");
 					}}
 				>
 					Logout

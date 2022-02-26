@@ -3,6 +3,8 @@ import axios from "axios";
 import {
 	CLOSE_POPUP,
 	CLOSE_SIGNUP_POPUP,
+	DATA_LOADING_FALSE,
+	DATA_LOADING_TRUE,
 	DEL_LOGGED_IN_USER,
 	LOG_IN,
 	LOG_OUT,
@@ -58,27 +60,80 @@ export const signUp = () => {
 	return { type: SIGNUP };
 };
 
+export const setLoadingTrue = () => {
+	return { type: DATA_LOADING_TRUE };
+};
+
+export const setLoadingFalse = () => {
+	return { type: DATA_LOADING_FALSE };
+};
+
 export const fetchUser = (payload) => (dispatch) => {
-	fetch(`http://localhost:8000/users?mobile=${String(payload)}`)
+	dispatch(setLoadingTrue());
+	fetch(`http://localhost:8000/users?email=${String(payload)}`)
 		.then((api) => api.json())
 		.then((data) => {
-			data.length === 0 ? dispatch(signUp()) : dispatch(setLoggedIn(data[0]));
+			if (data.length === 0) {
+				dispatch(signUp());
+			} else {
+				dispatch(setLoggedIn(data[0]));
+				localStorage.setItem("loggedinuser", JSON.stringify(data[0]));
+			}
+		})
+		.finally(() => {
+			dispatch(setLoadingFalse());
 		});
 };
 
 export const postUserData = (payload) => (dispatch) => {
+	dispatch(setLoadingTrue());
 	axios
 		.post(`http://localhost:8000/users`, payload)
-		.then(() => {
-			dispatch(setLoggedIn(payload));
+		.then((data) => {
+			dispatch(setLoggedIn(data.data));
 			dispatch(closeSignupPopup());
+			localStorage.setItem("loggedinuser", JSON.stringify(data.data));
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log(err))
+		.finally(() => {
+			dispatch(setLoadingFalse());
+		});
 };
 
 export const updateUser = (payload) => (dispatch) => {
-	console.log(payload);
-	axios.patch(`http://localhost:8000/users/${payload.id}`, payload).then(() => {
-		dispatch(setLoggedIn(payload));
-	});
+	dispatch(setLoadingTrue());
+	axios
+		.patch(`http://localhost:8000/users/${payload.id}`, payload)
+		.then(() => {
+			dispatch(setLoggedIn(payload));
+			localStorage.setItem("loggedinuser", JSON.stringify(payload));
+		})
+		.finally(() => {
+			dispatch(setLoadingFalse());
+		});
+};
+
+export const checkUser = (payload) => (dispatch) => {
+	dispatch(setLoadingTrue());
+	fetch(`http://localhost:8000/users?email=${payload.email}`)
+		.then((api) => api.json())
+		.then((data) => {
+			if (data.length === 0) {
+				fetch(`http://localhost:8000/users`, {
+					method: "POST",
+					body: JSON.stringify(payload),
+					headers: {
+						"content-type": "application/json",
+					},
+				})
+					.then((api) => api.json())
+					.then((data) => dispatch(setLoggedIn(data)));
+			} else {
+				localStorage.setItem("loggedinuser", JSON.stringify(data[0]));
+				dispatch(setLoggedIn(data[0]));
+			}
+		})
+		.finally(() => {
+			dispatch(setLoadingFalse());
+		});
 };

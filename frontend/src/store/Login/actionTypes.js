@@ -17,3 +17,6 @@ export const SIGNUP = "SIGNUP";
 
 export const SET_LOGGED_IN_USER = "SET_LOGGED_IN_USER";
 export const DEL_LOGGED_IN_USER = "DEL_LOGGED_IN_USER";
+
+export const DATA_LOADING_TRUE = "DATA_LOADING_TRUE";
+export const DATA_LOADING_FALSE = "DATA_LOADING_FALSE";

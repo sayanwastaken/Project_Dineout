@@ -1,10 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import "./styles/restPage.scss";
 import { Navbar } from "../Navbar/Navbar";
+import { useSelector, useDispatch } from "react-redux";
 import Slideshow from "./SlideImg";
 import axios from "axios";
+import {OfferOrDeal} from "../SingleRestaurant/OfferOrDeal"
 
 function Restaurant() {
+  const { oneRest } = useSelector((store) => store.oneRestReducer);
   const [data, Setdata] = useState([]);
   const [type, Settype] = useState([]);
   const [bestItems, SetbestItems] = useState([]);
@@ -29,14 +32,14 @@ function Restaurant() {
     "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/2/y/j/m25868-164257258161e7ab2533ecb.jpg?tr=tr:n-xlarge",
     "https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/v/r/m48242-163375806161612b6d44748.jpg?tr=tr:n-xlarge",
   ];
-
+  console.log(oneRest);
   useEffect(() => {
-    axios.get("http://localhost:8080/restaurants").then((res) => {
-      Setdata(res.data[0]);
-      Settype(res.data[0].type);
-      Setfeatures(res.data[0].features);
-      SetbestItems(res.data[0].bestItems);
-      Setimgs(res.data[0].image_urls);
+    axios.get(`http://localhost:8080/restaurants/${oneRest._id}`).then((res) => {
+      Setdata(res.data);
+      Settype(res.data.type);
+      Setfeatures(res.data.features);
+      SetbestItems(res.data.bestItems);
+      Setimgs(res.data.image_urls);
     });
   }, []);
 
@@ -80,7 +83,9 @@ function Restaurant() {
           </div>
         </div>
 
-        <div className="rightRest">2</div>
+        <div className="rightRest">
+          <OfferOrDeal/>
+        </div>
         <div className="optionDiv" id="optionDiv">
           <div
             tabIndex="-1"
