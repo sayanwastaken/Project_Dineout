@@ -12,6 +12,7 @@ import { BookATable } from "./components/BookATable/BookATable";
 import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevReserv";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "./store/Login/actions";
+import {OfferOrDeal} from "./components/SingleRestaurant/OfferOrDeal"
 
 function App() {
 	const dispatch = useDispatch();

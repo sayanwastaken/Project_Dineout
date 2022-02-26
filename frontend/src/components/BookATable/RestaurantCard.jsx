@@ -2,19 +2,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+//redux imports
+import {useSelector,useDispatch} from "react-redux"
+import {sendRest,delRest} from "../../store/oneRest/actions"
+
 // Inner Components Imports
 import { OfferSection } from "./OfferSection";
 import { ratingsArray } from "./randomRatings";
 
+
 // Styles Import
 import "./styles/rscard.global.scss";
 
-export const RestaurantCard = ({ name, type, price, features, image, id }) => {
+export const RestaurantCard = ({ name, type, price, features, image, id, singleRest}) => {
 	const navigate = useNavigate();
+	const {oneRest} = useSelector((store) => store.oneRestReducer);
+	const dispatch = useDispatch();
+
+	
 
 	return (
 		<div className="restaurantCard">
-			<img onClick={() => navigate(`/book-a-table/${id}`)} src={image} alt="" />
+			<img onClick={() => {
+
+				// console.log(singleRest);
+				dispatch(sendRest(singleRest));
+				navigate("/restaurants");
+			}} src={image} alt="" />
 			<div className="card__text">
 				<h3 className="card__heading">{name}</h3>
 				<p className="card__rating">
