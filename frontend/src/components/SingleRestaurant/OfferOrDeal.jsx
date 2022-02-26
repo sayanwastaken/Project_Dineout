@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Calender from "react-calendar";
 import DatePicker from "react-date-picker";
+import { useNavigate } from "react-router-dom";
 
 //redux imports
 import {useSelector,useDispatch} from "react-redux"
 import {sendRest,delRest} from "../../store/oneRest/actions"
+
 
 // Inner Imports
 import { lunchTimings, dinnerTimings } from "./timings";
@@ -21,7 +23,7 @@ export const OfferOrDeal = () => {
 	const [mealSelector, setMealSelector] = useState("lunch");
 	const [guestCounter, setGuestCounter] = useState(0);
 	const dispatch = useDispatch();
-
+	const navigate=useNavigate()
 	const handleMealSelector = (value) => {
 		setMealSelector(value);
 	};
@@ -114,11 +116,9 @@ export const OfferOrDeal = () => {
 
 					}} onClick={()=>{
 						dispatch(delRest())
+						navigate("/book-a-table")
 					}}>Continue</button>}
 				</div>
-				<button onClick={()=>{
-					console.log(oneRest)
-				}} >state</button>
 			</div>
 		</div>
 	);
