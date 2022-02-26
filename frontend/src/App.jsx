@@ -1,7 +1,6 @@
 // Third Party Imports
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 // Inner Imports
 import { Navbar } from "./components/Navbar/Navbar";
 
@@ -12,6 +11,7 @@ import { BookATable } from "./components/BookATable/BookATable";
 import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevReserv";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "./store/Login/actions";
+import Passport from "./components/dineoutpassport/Dine";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ function App() {
           element={<SinglePrevReservDetails />}
         ></Route>
         <Route path="/book-a-table" element={<BookATable />}></Route>
+        <Route path="/dine-passport" element={<Passport />}></Route>
       </Routes>
     </div>
   );
