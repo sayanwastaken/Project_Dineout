@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // Inner Components Imports
-import { OfferSection } from "./OfferSection";
 import { ratingsArray } from "./randomRatings";
 
 // Styles Import
@@ -25,7 +24,6 @@ export const RestaurantCard = ({ name, type, price, features, image, id }) => {
 					₹ {price} | {type.join(", ")}
 				</p>
 			</div>
-			{/* <OfferSection /> */}
 		</div>
 	);
 };

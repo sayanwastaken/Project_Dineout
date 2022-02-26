@@ -1,6 +1,6 @@
 // Third Party Imports
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // Inner Imports
@@ -19,13 +19,13 @@ import { applySearch } from "../../store/Restaurants/actions";
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
 	const [location, setLocation] = useState("");
-	const locationRef = useRef();
-	const dispatch = useDispatch();
-
-	// Modals state
-	// const [signUpModal, setSignUpModal] = useState(false);
-
 	const [loginModal, setLoginModal] = useState(false);
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const buttonRef = useRef();
+	const locationRef = useRef();
 
 	// Modal Handlers
 	const handleLoginModal = (value) => {
@@ -46,6 +46,10 @@ export const Navbar = () => {
 	return (
 		<div className="wrapper">
 			<nav className="navbar">
+				<img
+					src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
+					alt=""
+				/>
 				<NavSelect isSelect={selectClick} isPopup={isPopupOn}>
 					<i className="material-icons location">location_on</i>
 					<i className="material-icons down_arrow">arrow_drop_down</i>
@@ -78,12 +82,21 @@ export const Navbar = () => {
 				<span className="inputSpan">
 					<i className="material-icons">search</i>
 					<InputText
+						onKeyPress={(e) =>
+							e.key === "Enter" ? buttonRef.current.click() : null
+						}
 						ref={inputRef}
 						type="search"
 						isPopup={isPopupOn}
 						placeholder="Search for Restraunts, Offers, Deals or Events..."
 					/>
-					<Button onClick={() => dispatch(applySearch(inputRef.current.value))}>
+					<Button
+						ref={buttonRef}
+						onClick={() => {
+							dispatch(applySearch(inputRef.current.value));
+							navigate("/book-a-table");
+						}}
+					>
 						Search
 					</Button>
 				</span>

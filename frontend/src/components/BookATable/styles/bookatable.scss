@@ -1,7 +1,13 @@
 @import "../../../global.scss";
 
-.mapped__restaurants {
+.best__restaurants {
 	margin-top: $margin-top;
+	color: grey;
+	font-weight: 500;
+	font-size: 25px;
+}
+
+.mapped__restaurants {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
