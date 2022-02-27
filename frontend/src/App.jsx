@@ -41,7 +41,7 @@ function App() {
 				<Route path="/dineout-passport" element={<Passport />}></Route>
 			</Routes>
 
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }

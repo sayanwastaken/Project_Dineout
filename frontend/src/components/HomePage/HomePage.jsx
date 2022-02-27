@@ -8,6 +8,7 @@ import { InputText } from "../Navbar/styled-components/InputText";
 import { Button } from "../Navbar/styled-components/Button";
 import { applySearch, getRestaurants } from "../../store/Restaurants/actions";
 import { RestaurantCard } from "../BookATable/RestaurantCard";
+import Footer from "../Footer/Footer";
 
 // Styles Imports
 import "./styles/home.global.scss";
@@ -29,6 +30,7 @@ export const HomePage = () => {
 	};
 
 	return (
+		<>
 		<div className="home_page">
 			<div className="image_search_section">
 				<h1>
@@ -79,5 +81,7 @@ export const HomePage = () => {
 				</div>
 			</div>
 		</div>
+		<Footer/>
+		</>
 	);
 };

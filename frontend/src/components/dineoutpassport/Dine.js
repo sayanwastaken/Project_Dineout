@@ -3,9 +3,11 @@ import "./Dine.css";
 import Cara from "./Cara";
 import Slider from "./Slider";
 import { Button } from "@material-ui/core";
+import Footer from "../Footer/Footer";
 
 function Passport() {
 	return (
+		<>
 		<div className="passportCont">
 			<div className="gif">
 				<img
@@ -43,6 +45,8 @@ function Passport() {
         </Button>
       </div> */}
 		</div>
+	  <Footer/>
+		</>
 	);
 }
 
