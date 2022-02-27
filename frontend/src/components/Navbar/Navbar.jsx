@@ -120,7 +120,7 @@ export const Navbar = () => {
 					<Link to="/">Dineout Pay</Link>
 				</li>
 				<li>
-					<Link to="/">Dineout Passport</Link>
+					<Link to="/dineout-passport">Dineout Passport</Link>
 				</li>
 				<li>
 					<Link to="/">Super Saver</Link>

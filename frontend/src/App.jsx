@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 
 // Styles Imports
 import "./App.css";
+import Passport from "./components/dineoutpassport/Dine";
 
 function App() {
 	const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
 				></Route>
 				<Route path="/book-a-table" element={<BookATable />}></Route>
 				<Route path="/restaurants" element={<Restaurant />}></Route>
+				<Route path="/dineout-passport" element={<Passport />}></Route>
 			</Routes>
 
 			<Footer />

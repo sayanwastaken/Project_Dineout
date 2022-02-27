@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FooterStyle = styled.div`
+	z-index: 1000;
 	hr {
 		color: #d4d4d4;
 	}
