@@ -7,11 +7,13 @@ import thunk from "redux-thunk";
 import { otherReducer } from "./Restaurants/reducer";
 import { loginReducer } from "./Login/reducer";
 import { authReducer } from "./authRedux/reducer";
+import {oneRestReducer} from "./oneRest/reducer"
 
 const combinedReducer = combineReducers({
 	loginReducer,
 	otherReducer,
 	authReducer,
+	oneRestReducer,
 });
 
 export const store = createStore(

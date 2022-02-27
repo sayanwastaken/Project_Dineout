@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import Calender from "react-calendar";
 import DatePicker from "react-date-picker";
+import { useNavigate } from "react-router-dom";
+
+//redux imports
+import {useSelector,useDispatch} from "react-redux"
+import {sendRest,delRest} from "../../store/oneRest/actions"
+
 
 // Inner Imports
 import { lunchTimings, dinnerTimings } from "./timings";
@@ -10,12 +16,14 @@ import { TimeButtons } from "./TimeButtons";
 import { Button } from "../styled-components/Button";
 
 export const OfferOrDeal = () => {
+	const {oneRest} = useSelector((store) => store.oneRestReducer);
 	const [value, onChange] = useState(new Date());
 	const [pDate, setPDate] = useState(new Date());
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [mealSelector, setMealSelector] = useState("lunch");
 	const [guestCounter, setGuestCounter] = useState(0);
-
+	const dispatch = useDispatch();
+	const navigate=useNavigate()
 	const handleMealSelector = (value) => {
 		setMealSelector(value);
 	};
@@ -96,7 +104,20 @@ export const OfferOrDeal = () => {
 					<p className="guest__details-heading">Enter Guests Details</p>
 					<input type="text" placeholder="Guest Name" />
 					<input type="text" placeholder="Mobile Number" />
-					{guestCounter >= 1 && <Button wd="85%">Continue</Button>}
+					{guestCounter >= 1 && <button style={{
+						margin: "5px",
+						width: "280px",
+						height: "30px",
+						color:"white",
+						fontWeight:"bold",
+						borderRadius:"10px",
+						border:"0",
+						backgroundColor:"#FF645A",
+
+					}} onClick={()=>{
+						dispatch(delRest())
+						navigate("/book-a-table")
+					}}>Continue</button>}
 				</div>
 			</div>
 		</div>

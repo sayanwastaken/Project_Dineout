@@ -12,6 +12,8 @@ import { SinglePrevReservDetails } from "./components/UserProfile/SinglePrevRese
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "./store/Login/actions";
 import { HomePage } from "./components/HomePage/HomePage";
+import Restaurant from "./components/RestPage/Restaurant"
+
 
 function App() {
 	const dispatch = useDispatch();
@@ -34,6 +36,7 @@ function App() {
 					element={<SinglePrevReservDetails />}
 				></Route>
 				<Route path="/book-a-table" element={<BookATable />}></Route>
+        <Route path="/restaurants" element={<Restaurant />}></Route>
 			</Routes>
 		</div>
 	);
