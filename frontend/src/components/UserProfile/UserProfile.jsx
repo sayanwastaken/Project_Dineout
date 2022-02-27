@@ -1,17 +1,18 @@
 // Third Party imports
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 // Inner Imports
 import { PrevReservCard } from "./PrevReservCard";
 import { UserInfoEdits } from "./UserInfoEdits";
+import { UserEditModal } from "./UserEditModal";
 
 // Styles Imports
 import "./styles/userprofile.global.scss";
-import { UserEditModal } from "./UserEditModal";
 
 export const UserProfile = () => {
 	const [openModal, setOpenModal] = useState(false);
-
+	const { loggedInUser } = useSelector((store) => store.loginReducer);
 	const toggleModal = (value) => {
 		setOpenModal(value);
 	};
@@ -22,8 +23,9 @@ export const UserProfile = () => {
 			<div className="bottomSection">
 				<div className="prevReservations left">
 					<h2 className="heading">Previous Reservations</h2>
-					<PrevReservCard />
-					<PrevReservCard />
+					{loggedInUser.prevReservations.map((oneReservation) => {
+						return <PrevReservCard />;
+					})}
 				</div>
 				<div className="right">
 					<div className="totalSavings">

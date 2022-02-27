@@ -21,26 +21,30 @@ export const BookATable = () => {
 	};
 
 	return (
-		<div className="mapped__restaurants">
-			<div className="left">
-				<FilterSection />
+		<>
+			<h1 className="best__restaurants">Best Restaurants Near You</h1>
+			<div className="mapped__restaurants">
+				<div className="left">
+					<FilterSection />
+				</div>
+				<div className="right">
+					{restaurants.map((oneRest) => {
+						const { name, _id, price, type, image_urls } = oneRest;
+						return (
+							<RestaurantCard
+								name={name}
+								type={type}
+								id={_id}
+								price={price}
+								key={_id}
+								image={image_urls[0]}
+                singleRest={oneRest}
+							/>
+						);
+					})}
+				</div>
 			</div>
-			<div className="right">
-				{restaurants.map((oneRest) => {
-					const { name, _id, price, type, image_urls } = oneRest;
-					return (
-						<RestaurantCard
-							name={name}
-							type={type}
-							id={_id}
-							price={price}
-							key={_id}
-							image={image_urls[0]}
-							singleRest={oneRest}
-						/>
-					);
-				})}
-			</div>
-		</div>
+		</>
+
 	);
 };

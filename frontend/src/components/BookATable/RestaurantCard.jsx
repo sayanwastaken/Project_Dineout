@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { sendRest, delRest } from "../../store/oneRest/actions";
 
 // Inner Components Imports
-import { OfferSection } from "./OfferSection";
 import { ratingsArray } from "./randomRatings";
 
 
@@ -26,6 +25,8 @@ export const RestaurantCard = ({
   const navigate = useNavigate();
   const { oneRest } = useSelector((store) => store.oneRestReducer);
   const dispatch = useDispatch();
+
+	
 
   return (
     <div className="restaurantCard">
@@ -51,4 +52,5 @@ export const RestaurantCard = ({
       {/* <OfferSection /> */}
     </div>
   );
+
 };
