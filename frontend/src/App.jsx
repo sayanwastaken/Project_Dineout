@@ -38,6 +38,7 @@ function App() {
 				<Route path="/book-a-table" element={<BookATable />}></Route>
 				<Route path="/restaurants" element={<Restaurant />}></Route>
 			</Routes>
+
 			<Footer />
 		</div>
 	);

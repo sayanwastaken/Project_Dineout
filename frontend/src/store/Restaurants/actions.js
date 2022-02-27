@@ -33,7 +33,7 @@ export const delRest = (payload) => {
 
 export const getRestaurants = () => (dispatch) => {
 	dispatch(getRestLoading());
-	fetch("http://127.0.0.1:8080/restaurants")
+	fetch("https://blooming-harbor-26431.herokuapp.com/restaurants")
 		.then((api) => api.json())
 		.then((data) => {
 			console.log(data);
@@ -46,7 +46,7 @@ export const getRestaurants = () => (dispatch) => {
 
 export const applyFilters = (payload) => (dispatch) => {
 	dispatch(getRestLoading());
-	fetch(`http://127.0.0.1:8080/restaurants`)
+	fetch(`https://blooming-harbor-26431.herokuapp.com/restaurants`)
 		.then((api) => api.json())
 		.then((data) => {
 			const { wifi_service, cards_accepted, wallet_accepted, air_conditioned } =
@@ -76,7 +76,7 @@ export const applyFilters = (payload) => (dispatch) => {
 
 export const applyCuisine = (payload) => (dispatch) => {
 	dispatch(getRestLoading());
-	fetch(`http://127.0.0.1:8080/restaurants`)
+	fetch(`https://blooming-harbor-26431.herokuapp.com/restaurants`)
 		.then((api) => api.json())
 		.then((data) => {
 			let c_rest = [...data];
@@ -111,7 +111,7 @@ export const applyCuisine = (payload) => (dispatch) => {
 
 export const applySearch = (payload) => (dispatch) => {
 	dispatch(getRestLoading());
-	fetch(`http://127.0.0.1:8080/restaurants`)
+	fetch(`https://blooming-harbor-26431.herokuapp.com/restaurants`)
 		.then((api) => api.json())
 		.then((data) => {
 			let c_arr = data.filter((c) =>

@@ -70,7 +70,11 @@ export const setLoadingFalse = () => {
 
 export const fetchUser = (payload) => (dispatch) => {
 	dispatch(setLoadingTrue());
-	fetch(`http://localhost:8000/users?email=${String(payload)}`)
+	fetch(
+		`https://isharaman-08-fakeserver.herokuapp.com/users?email=${String(
+			payload
+		)}`
+	)
 		.then((api) => api.json())
 		.then((data) => {
 			if (data.length === 0) {
@@ -88,7 +92,7 @@ export const fetchUser = (payload) => (dispatch) => {
 export const postUserData = (payload) => (dispatch) => {
 	dispatch(setLoadingTrue());
 	axios
-		.post(`http://localhost:8000/users`, payload)
+		.post(`https://isharaman-08-fakeserver.herokuapp.com/users`, payload)
 		.then((data) => {
 			dispatch(setLoggedIn(data.data));
 			dispatch(closeSignupPopup());
@@ -103,7 +107,10 @@ export const postUserData = (payload) => (dispatch) => {
 export const updateUser = (payload) => (dispatch) => {
 	dispatch(setLoadingTrue());
 	axios
-		.patch(`http://localhost:8000/users/${payload.id}`, payload)
+		.patch(
+			`https://isharaman-08-fakeserver.herokuapp.com/users/${payload.id}`,
+			payload
+		)
 		.then(() => {
 			dispatch(setLoggedIn(payload));
 			localStorage.setItem("loggedinuser", JSON.stringify(payload));
@@ -115,11 +122,13 @@ export const updateUser = (payload) => (dispatch) => {
 
 export const checkUser = (payload) => (dispatch) => {
 	dispatch(setLoadingTrue());
-	fetch(`http://localhost:8000/users?email=${payload.email}`)
+	fetch(
+		`https://isharaman-08-fakeserver.herokuapp.com/users?email=${payload.email}`
+	)
 		.then((api) => api.json())
 		.then((data) => {
 			if (data.length === 0) {
-				fetch(`http://localhost:8000/users`, {
+				fetch(`https://isharaman-08-fakeserver.herokuapp.com/users`, {
 					method: "POST",
 					body: JSON.stringify(payload),
 					headers: {

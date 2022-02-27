@@ -11,6 +11,7 @@ import { RestaurantCard } from "../BookATable/RestaurantCard";
 
 // Styles Imports
 import "./styles/home.global.scss";
+import Card from "../cards/card";
 
 export const HomePage = () => {
 	const buttonRef = useRef();
@@ -57,6 +58,7 @@ export const HomePage = () => {
 					</Button>
 				</span>
 			</div>
+			{/* <Card /> */}
 			<div className="featured_restaurants">
 				<h2>Featured Restaurants</h2>
 				<div className="mapped_restaurants">

@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "./styles/restPage.scss";
-import { Navbar } from "../Navbar/Navbar";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Slideshow from "./SlideImg";
 import axios from "axios";
 import { OfferOrDeal } from "../SingleRestaurant/OfferOrDeal";
@@ -31,10 +30,12 @@ function Restaurant() {
 		"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/2/y/j/m25868-164257258161e7ab2533ecb.jpg?tr=tr:n-xlarge",
 		"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/v/r/m48242-163375806161612b6d44748.jpg?tr=tr:n-xlarge",
 	];
-	console.log(oneRest);
+
 	useEffect(() => {
 		axios
-			.get(`http://localhost:8080/restaurants/${oneRest._id}`)
+			.get(
+				`https://blooming-harbor-26431.herokuapp.com/restaurants/${oneRest._id}`
+			)
 			.then((res) => {
 				Setdata(res.data);
 				Settype(res.data.type);

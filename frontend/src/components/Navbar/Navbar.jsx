@@ -47,6 +47,7 @@ export const Navbar = () => {
 		<div className="wrapper">
 			<nav className="navbar">
 				<img
+					onclick={() => navigate("/")}
 					src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
 					alt=""
 				/>
