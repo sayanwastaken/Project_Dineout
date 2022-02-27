@@ -45,12 +45,15 @@ export const Navbar = () => {
 
 	return (
 		<div className="wrapper">
-			<nav className="navbar">
+			<nav className="navbar" >
+
+				<Link to="/">
 				<img
-					onclick={() => navigate("/")}
+					
 					src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
 					alt=""
 				/>
+				</Link>
 				<NavSelect isSelect={selectClick} isPopup={isPopupOn}>
 					<i className="material-icons location">location_on</i>
 					<i className="material-icons down_arrow">arrow_drop_down</i>

@@ -31,6 +31,7 @@ export const UserEditModal = ({ handleModal }) => {
 						email: emailRef.current.value,
 						mobile: mobileRef.current.value,
 						id: loggedInUser.id,
+						prevReservations: loggedInUser.prevReservations
 					};
 
 					if (!payload.email || !payload.mobile || !payload.name) {
