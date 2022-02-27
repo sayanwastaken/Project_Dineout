@@ -1,29 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Calender from "react-calendar";
-import DatePicker from "react-date-picker";
 import { useNavigate } from "react-router-dom";
 
 //redux imports
-import {useSelector,useDispatch} from "react-redux"
-import {sendRest,delRest} from "../../store/oneRest/actions"
-
+import { useSelector, useDispatch } from "react-redux";
 
 // Inner Imports
 import { lunchTimings, dinnerTimings } from "./timings";
-
-import "./customCalender.scss";
 import { TimeButtons } from "./TimeButtons";
-import { Button } from "../styled-components/Button";
+import { updateUser } from "../../store/Login/actions";
+
+// Styles Imports
+import "./customCalender.scss";
 
 export const OfferOrDeal = () => {
-	const {oneRest} = useSelector((store) => store.oneRestReducer);
+	const { oneRest } = useSelector((store) => store.oneRestReducer);
+	const { isLoggedIn, loggedInUser } = useSelector(
+		(store) => store.loginReducer
+	);
 	const [value, onChange] = useState(new Date());
 	const [pDate, setPDate] = useState(new Date());
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [mealSelector, setMealSelector] = useState("lunch");
 	const [guestCounter, setGuestCounter] = useState(0);
 	const dispatch = useDispatch();
-	const navigate=useNavigate()
+	const navigate = useNavigate();
+
+	// Guest name is mobile ref
+	const guestNameRef = useRef();
+	const guestMobileRef = useRef();
+
 	const handleMealSelector = (value) => {
 		setMealSelector(value);
 	};
@@ -40,6 +46,7 @@ export const OfferOrDeal = () => {
 	useEffect(() => {
 		console.log(pDate);
 	}, [value, pDate]);
+
 	return (
 		<div className="mainDiv">
 			<h3 className="select__offer">Select an offer or deal</h3>
@@ -87,14 +94,26 @@ export const OfferOrDeal = () => {
 				<p>Guests</p>
 				<span className="guest__counter">
 					<i
-						onClick={() => handleGuestsCount(guestCounter - 1)}
+						onClick={() => {
+							handleGuestsCount(guestCounter - 1);
+							if (guestCounter === 1) {
+								guestNameRef.current.defaultValue = "";
+								guestMobileRef.current.defaultValue = "";
+							}
+						}}
 						className="material-icons"
 					>
 						remove_circle_outline
 					</i>
 					<p>{guestCounter}</p>
 					<i
-						onClick={() => handleGuestsCount(guestCounter + 1)}
+						onClick={() => {
+							if (isLoggedIn) {
+								guestNameRef.current.defaultValue = loggedInUser.name;
+								guestMobileRef.current.defaultValue = loggedInUser.mobile;
+							}
+							handleGuestsCount(guestCounter + 1);
+						}}
 						className="material-icons"
 					>
 						add_circle_outline
@@ -102,22 +121,50 @@ export const OfferOrDeal = () => {
 				</span>
 				<div className="guest__details">
 					<p className="guest__details-heading">Enter Guests Details</p>
-					<input type="text" placeholder="Guest Name" />
-					<input type="text" placeholder="Mobile Number" />
-					{guestCounter >= 1 && <button style={{
-						margin: "5px",
-						width: "280px",
-						height: "30px",
-						color:"white",
-						fontWeight:"bold",
-						borderRadius:"10px",
-						border:"0",
-						backgroundColor:"#FF645A",
-
-					}} onClick={()=>{
-						dispatch(delRest())
-						navigate("/book-a-table")
-					}}>Continue</button>}
+					<input ref={guestNameRef} type="text" placeholder="Guest Name" />
+					<input ref={guestMobileRef} type="text" placeholder="Mobile Number" />
+					{guestCounter >= 1 && (
+						<button
+							style={{
+								margin: "5px",
+								width: "280px",
+								height: "30px",
+								color: "white",
+								fontWeight: "bold",
+								borderRadius: "10px",
+								border: "0",
+								backgroundColor: "#FF645A",
+							}}
+							onClick={() => {
+								if (!isLoggedIn) {
+									alert("Please login in first");
+									return;
+								}
+								const payload = {
+									name: loggedInUser.name,
+									mobile: loggedInUser.mobile,
+									email: loggedInUser.email,
+									id: loggedInUser.id,
+									prevReservations: [
+										...loggedInUser.prevReservations,
+										{
+											...oneRest,
+											event_date: value,
+											event_time: selectedTime,
+											numGuests: guestCounter,
+											guestName: guestNameRef.current.value,
+											guestNumber: guestMobileRef.current.value,
+										},
+									],
+								};
+								dispatch(updateUser(payload));
+								alert("Booking Successful");
+								navigate("/");
+							}}
+						>
+							Continue
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

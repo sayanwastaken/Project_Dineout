@@ -13,6 +13,7 @@ import "./styles/userprofile.global.scss";
 export const UserProfile = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const { loggedInUser } = useSelector((store) => store.loginReducer);
+
 	const toggleModal = (value) => {
 		setOpenModal(value);
 	};
@@ -24,7 +25,28 @@ export const UserProfile = () => {
 				<div className="prevReservations left">
 					<h2 className="heading">Previous Reservations</h2>
 					{loggedInUser.prevReservations.map((oneReservation) => {
-						return <PrevReservCard />;
+						const {
+							name,
+							event_date,
+							event_time,
+							numGuests,
+							guestName,
+							guestNumber,
+							image_urls,
+							_id,
+						} = oneReservation;
+						return (
+							<PrevReservCard
+								name={name}
+								event_date={event_date}
+								event_time={event_time}
+								numGuests={numGuests}
+								guestName={guestName}
+								guestNumber={guestNumber}
+								image={image_urls}
+								id={_id}
+							/>
+						);
 					})}
 				</div>
 				<div className="right">

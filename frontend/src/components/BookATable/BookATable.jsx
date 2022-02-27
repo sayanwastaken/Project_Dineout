@@ -9,7 +9,6 @@ import { RestaurantCard } from "./RestaurantCard";
 import "./styles/bookatable.scss";
 export const BookATable = () => {
 	const { restaurants } = useSelector((store) => store.otherReducer);
-	
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -38,13 +37,12 @@ export const BookATable = () => {
 								price={price}
 								key={_id}
 								image={image_urls[0]}
-                singleRest={oneRest}
+								singleRest={oneRest}
 							/>
 						);
 					})}
 				</div>
 			</div>
 		</>
-
 	);
 };
