@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Slideshow from "./SlideImg";
 import axios from "axios";
 import { OfferOrDeal } from "../SingleRestaurant/OfferOrDeal";
+// import Footer from "../Footer/Footer";
 
 function Restaurant() {
 	const { oneRest } = useSelector((store) => store.oneRestReducer);
@@ -395,6 +396,7 @@ function Restaurant() {
 					/>
 				</div>
 			</div>
+			{/* <Footer /> */}
 		</>
 	);
 }

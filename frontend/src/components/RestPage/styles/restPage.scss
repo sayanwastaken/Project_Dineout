@@ -1,15 +1,15 @@
 @import "./variables.scss";
 @import "react-slideshow-image/dist/styles.css";
+@import '../../../global.scss';
 
 .restCont{
     // border: 1px solid $green;
     width: 80%;
     margin: auto;
     height: 100%;
-    margin-top: 10%; 
+    margin-top: $margin-top; 
     padding:1%;
     position: relative;
-    z-index: 0;
 } 
 .leftRest{
     display: inline-block;
@@ -20,7 +20,7 @@
       
     & > div {
         width: 100%;
-        height: 500px;
+        height: 528px;
         // border: 1px solid black;
         display:flex;
         flex-direction: column;
@@ -300,6 +300,7 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
     padding-left:10px;
     padding-bottom: 5px;
+    // border:1px solid black;
 }
 .aboutLogo{
     width: 100%;
@@ -469,7 +470,7 @@
     width: 70%;
     height: 45px !important;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 160px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
 
 
