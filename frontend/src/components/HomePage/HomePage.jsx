@@ -70,6 +70,7 @@ export const HomePage = () => {
 								price={price}
 								key={_id}
 								image={image_urls[0]}
+								singleRest={oneRest}
 							/>
 						);
 					})}
