@@ -1,6 +1,8 @@
 import {
 	CLOSE_POPUP,
 	CLOSE_SIGNUP_POPUP,
+	DATA_LOADING_FALSE,
+	DATA_LOADING_TRUE,
 	DEL_LOGGED_IN_USER,
 	LOG_IN,
 	LOG_OUT,
@@ -17,6 +19,7 @@ const init = {
 	isPopupOn: false,
 	isSignupPopupOn: false,
 	signUp: false,
+	isLoading: false,
 	loggedInUser: {},
 };
 
@@ -44,7 +47,7 @@ export const loginReducer = (state = init, { payload, type }) => {
 			return { ...state, isLoggedIn: true };
 
 		case LOG_OUT:
-			return { ...state, isLoggedIn: false };
+			return { ...state, isLoggedIn: false, loggedInUser: {} };
 
 		case SET_LOGGED_IN_USER:
 			return { ...state, isLoggedIn: true, loggedInUser: payload };
@@ -55,6 +58,11 @@ export const loginReducer = (state = init, { payload, type }) => {
 		case SIGNUP:
 			return { ...state, isSignupPopupOn: true };
 
+		case DATA_LOADING_TRUE:
+			return { ...state, isLoading: true };
+
+		case DATA_LOADING_FALSE:
+			return { ...state, isLoading: false };
 		default:
 			return { ...state };
 	}

@@ -3,6 +3,8 @@ import {
 	DEL_REST,
 	GET_REST_LOADING,
 	GET_REST_SUCCESS,
+	SET_LOADING_FALSE,
+	SET_LOADING_TRUE,
 } from "./actionTypes";
 
 const init = {
@@ -23,8 +25,14 @@ export const otherReducer = (state = init, { type, payload }) => {
 		case GET_REST_LOADING:
 			return { ...state, loading: true };
 
+		case SET_LOADING_TRUE:
+			return { ...state, loading: true };
+
+		case SET_LOADING_FALSE:
+			return { ...state, loading: false };
+
 		case GET_REST_SUCCESS:
-			return { ...state, loading: false, restaurants: payload };
+			return { ...state, restaurants: payload };
 
 		default:
 			return { ...state };

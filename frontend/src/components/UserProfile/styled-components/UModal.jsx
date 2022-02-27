@@ -6,6 +6,7 @@ export const UModal = styled.div`
 	width: 450px;
 	border-radius: 20px;
 	position: fixed;
+	z-index: 20;
 	padding: 20px 25px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	top: 40%;

@@ -11,6 +11,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const rest = await resModel.findById(req.params.id).lean().exec();
+    return res.status(200).send(rest);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const restaurant = await resModel.create(req.body);

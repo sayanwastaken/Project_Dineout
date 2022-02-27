@@ -1,6 +1,6 @@
 // Third Party Imports
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // Inner Imports
@@ -8,24 +8,24 @@ import { Button } from "./styled-components/Button";
 import { InputText } from "./styled-components/InputText";
 import { NavSelect } from "./styled-components/NavSelect";
 import { locations } from "./locations";
-import { openPopup } from "../../store/Login/actions";
-
-// Styles
-import "./styles/nav.global.scss";
 import { LoggedInMenu } from "./LoggedInMenu";
 import { LoginModal } from "./LoginModal";
 import { SignupModal } from "./SignupModal";
 
+// Styles
+import "./styles/nav.global.scss";
+import { applySearch } from "../../store/Restaurants/actions";
+
 export const Navbar = () => {
 	const [selectClick, setSelectClick] = useState(false);
 	const [location, setLocation] = useState("");
-	const locationRef = useRef();
-	const dispatch = useDispatch();
-
-	// Modals state
-	// const [signUpModal, setSignUpModal] = useState(false);
-
 	const [loginModal, setLoginModal] = useState(false);
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const buttonRef = useRef();
+	const locationRef = useRef();
 
 	// Modal Handlers
 	const handleLoginModal = (value) => {
@@ -40,9 +40,16 @@ export const Navbar = () => {
 		setSelectClick(!selectClick);
 	};
 
+	// Input REf
+	const inputRef = useRef();
+
 	return (
 		<div className="wrapper">
 			<nav className="navbar">
+				<img
+					src="https://im1.dineout.co.in/images/uploads/misc/2019/Jul/25/website-logo.png"
+					alt=""
+				/>
 				<NavSelect isSelect={selectClick} isPopup={isPopupOn}>
 					<i className="material-icons location">location_on</i>
 					<i className="material-icons down_arrow">arrow_drop_down</i>
@@ -75,11 +82,23 @@ export const Navbar = () => {
 				<span className="inputSpan">
 					<i className="material-icons">search</i>
 					<InputText
+						onKeyPress={(e) =>
+							e.key === "Enter" ? buttonRef.current.click() : null
+						}
+						ref={inputRef}
 						type="search"
 						isPopup={isPopupOn}
 						placeholder="Search for Restraunts, Offers, Deals or Events..."
 					/>
-					<Button>Search</Button>
+					<Button
+						ref={buttonRef}
+						onClick={() => {
+							dispatch(applySearch(inputRef.current.value));
+							navigate("/book-a-table");
+						}}
+					>
+						Search
+					</Button>
 				</span>
 
 				{!isLoggedIn ? (
@@ -94,7 +113,7 @@ export const Navbar = () => {
 					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="/">Book A Table</Link>
+					<Link to="/book-a-table">Book A Table</Link>
 				</li>
 				<li>
 					<Link to="/">Dineout Pay</Link>
