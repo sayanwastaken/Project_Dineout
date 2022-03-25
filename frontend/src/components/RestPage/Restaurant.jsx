@@ -35,7 +35,7 @@ function Restaurant() {
 	useEffect(() => {
 		axios
 			.get(
-				`https://blooming-harbor-26431.herokuapp.com/restaurants/${oneRest._id}`
+				`https://dineout-server.herokuapp.com/restaurants/${oneRest._id}`
 			)
 			.then((res) => {
 				Setdata(res.data);

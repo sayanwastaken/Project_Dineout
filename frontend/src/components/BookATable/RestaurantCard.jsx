@@ -23,7 +23,6 @@ export const RestaurantCard = ({
   singleRest,
 }) => {
   const navigate = useNavigate();
-  const { oneRest } = useSelector((store) => store.oneRestReducer);
   const dispatch = useDispatch();
 
 	

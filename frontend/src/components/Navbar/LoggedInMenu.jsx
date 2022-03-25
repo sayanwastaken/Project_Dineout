@@ -37,7 +37,7 @@ export const LoggedInMenu = () => {
 				>
 					Profile
 				</p>
-				<p>Cupon History</p>
+				<p>Coupon History</p>
 				<p
 					onClick={() => {
 						navigate("/");
